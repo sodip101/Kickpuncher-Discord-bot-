@@ -70,6 +70,21 @@ client.on('message', function(message){
                     }
                 }
                 break;
+            case 'covid'://display total no. of COVID-19 cases in Nepal 
+                const fetch=require('node-fetch');
+                const url='https://api.covid19api.com/country/nepal/status/confirmed';
+
+                const getData=async url=>{
+                    try{
+                        const response=await fetch(url);
+                        const json= await response.json();
+                        const data= await json.pop();
+                        message.channel.send('Total Confirmed Cases of COVID-19 in Nepal: '+ data.Cases);
+                    }catch(error){
+                        console.log(error);
+                    }
+                }
+                getData(url);
         }
     }
 });
